@@ -2,7 +2,8 @@ import java.util.Scanner;
 import java.util.Date;
 import java.net.Socket;
 import java.io.IOException;
-
+import java.net.InetAddress;
+import java.net.*;	
 
 public class TCPSyn
 {	
@@ -18,7 +19,7 @@ public class TCPSyn
 		catch(IOException e){
 			System.out.println(e.getMessage());
 			System.out.println("Socket could not be created");
-			System.exit(0);
+			//System.exit(0);
 		}
 		System.out.println("SUCCESS");
 
@@ -39,12 +40,20 @@ public class TCPSyn
 		int ip_id = 54321; //Id of this packet
 		int ip_frag_off = 0;
 		int ip_ttl = 255;
-		//int ip_proto = s
+		//int ip_proto = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		int ip_check = 0; //kernel will fill the correct checksum
-		//int ip_saddr = 
-		//int ip_daddr = 
+		 try {
+	        InetAddress ip_saddr = InetAddress.getByName(args[0]);
+	    } catch (UnknownHostException e) {
+	        throw new RuntimeException("Test failed. Unknown ip: " + args[0]);
+	    }
+		try {
+	        InetAddress ip_daddr = InetAddress.getByName(args[0]);
+	    } catch (UnknownHostException e) {
+	        throw new RuntimeException("Test failed. Unknown ip: " + args[0]);
+	    }
 
-		//int ip_ihl_ver = 
+		int ip_ihl_ver = (ip_ver << 4) + ip_ihl;
 
 		// the ! in the pack format string means network order
 		//String ip_header = 
