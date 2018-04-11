@@ -5,6 +5,6 @@
 
 ## Team members Logs
 ### Submission 2
-1. Melinda Sherrill - worked front-end webpages and on SQL injections using python-coded expoits that utlitize the requests liberary
+1. Melinda Sherrill - worked front-end webpages and on SQL injections using python-coded expoits that utlitize the requests library
 2. David Jensen - worked on APflood DoSS attack using web sockets in java
 3. Edgar Delgado - worked on TCP+SYN flood using web sockets in java
