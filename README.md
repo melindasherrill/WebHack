@@ -20,3 +20,8 @@ OR '1'='1' /*
 ``` pip install requests ```
 * Once this is installed, you can run the sessions file:
 ``` python sessions.py "insert injection here" ```
+
+## References:
+http://www.pythonforbeginners.com/requests/using-requests-in-python
+https://github.com/saminiir/level-ip
+https://github.com/picoCTF/picoCTF-problems-deprecated
