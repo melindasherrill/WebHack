@@ -14,6 +14,9 @@ OR '1'='1' /*
 2. David Jensen - worked on APflood DoSS attack using web sockets in java
 3. Edgar Delgado - worked on TCP+SYN flood using web sockets in java
 
-## To Run
-* All java files can be ran with basic javac and java commands
-* 
+## To Run Python scripts
+* In the python folder, you will see a few python scripts. Both can be ran. One creates a sample database using the SQlite3 Api. The other will allow you to send sql injections to the website. First, make sure the python requests lib is installed on the icd server.
+*  Run this:
+``` pip install requests ```
+* Once this is installed, you can run the sessions file:
+``` python sessions.py ```
