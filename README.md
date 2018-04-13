@@ -25,3 +25,4 @@ OR '1'='1' /*
 1. http://www.pythonforbeginners.com/requests/using-requests-in-python
 2. https://github.com/saminiir/level-ip
 3. https://github.com/picoCTF/picoCTF-problems-deprecated
+4. https://www.cloudflare.com/learning/ddos/udp-flood-ddos-attack/
