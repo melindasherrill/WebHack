@@ -1,5 +1,5 @@
 <?php
-    $db = new SQLite3('dbs/users.sqlite');
+    $db = new SQLite3('../dbs/users.sqlite');
 
     if(isset($_POST["login-submit"])){
         $user = $_POST['user'];
