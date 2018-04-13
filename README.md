@@ -19,4 +19,4 @@ OR '1'='1' /*
 *  Run this:
 ``` pip install requests ```
 * Once this is installed, you can run the sessions file:
-``` python sessions.py ```
+``` python sessions.py "insert injection here" ```
