@@ -6,7 +6,7 @@ conn = sqlite3.connect("users.sqlite");
 c = conn.cursor()
 
 def create_table():
-	c.execute('CREATE TABLE IF NOT EXISTS users(id REAL, user TEXT, password TEXT)')
+	c.execute('CREATE TABLE IF NOT EXISTS users(id REAL, username TEXT, password TEXT)')
 
 
 def data_entry():
