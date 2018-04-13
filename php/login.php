@@ -4,7 +4,7 @@
     if(isset($_POST["login-submit"])){
         $user = $_POST['user'];
         $pass = $_POST['password'];     
-        $result = $db->query("select * from credentials where user = '$user' and password = '$pass'");//select username
+        $result = $db->query("select * from users where user = '$user' and password = '$pass'");//select username
         $row = $result->fetchArray();
 
         if($row == false){       
