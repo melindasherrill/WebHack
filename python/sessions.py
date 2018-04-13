@@ -5,7 +5,7 @@ BASEURL = "http://frechetta.me/php/login.php"  # Input the URL running the .php 
 
 SESSION = requests.Session()
 
-TRUE = "Someone already has registered"
+TRUE = "Logged in"
 def postURL(url, data):
 	return SESSION.post(format(url), data).text
 
