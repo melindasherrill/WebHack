@@ -1,7 +1,7 @@
 import requests
 import sys
 
-BASEURL = "http://130.221.105.251/register.php"  # Input the URL running the .php file that connects to db
+BASEURL = "http://frechetta.me/php/login.php"  # Input the URL running the .php file that connects to db
 
 SESSION = requests.Session()
 
