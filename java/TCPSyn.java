@@ -40,7 +40,7 @@ public class TCPSyn
 		int ip_id = 54321; //Id of this packet
 		int ip_frag_off = 0;
 		int ip_ttl = 255;
-		//int ip_proto = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+		int ip_proto = tcpPort; //socket.IPPROTO_TCP
 		int ip_check = 0; //kernel will fill the correct checksum
 		try {
 	        InetAddress ip_saddr = InetAddress.getByName(source_ip);
@@ -56,7 +56,7 @@ public class TCPSyn
 		int ip_ihl_ver = (ip_ver << 4) + ip_ihl;
 
 		/* the ! in the pack format string means network order */
-		//String ip_header = 
+		//String ip_header = pack('!BBHHHBBH4s4s' , ip_ihl_ver, ip_tos, ip_tot_len, ip_id, ip_frag_off, ip_ttl, ip_proto, ip_check, ip_saddr, ip_daddr)
 
 		/* tcp header fields */
 		int tcp_source = 1234;   // source port
@@ -96,7 +96,7 @@ public class TCPSyn
 	    } catch (UnknownHostException e) {
 	        throw new RuntimeException("Test failed. Unknown ip: " + args[0]);
 	    }
-	    
+
 		int placeholder = 0;
 		// protocol = socket.IPPROTO_TCP
 		//int tcp_length = len(tcp_header) + len(user_data)
