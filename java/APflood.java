@@ -11,7 +11,16 @@ import java.io.InputStreamReader;
 public class APflood {
 
 public static void main(String[] args) {
-}
+
+	try {
+		Socket thissocket = new Socket(serverIP);
+	} catch (IOException e) {
+		System.out.println(e.readLine());
+		System.out.println("Error; socket wasnt created, try again");
+	}
+	System.out.println("Socket sucessfully created");
+
+
 	//ip header fields
 	int s = 0;
 	boolean num = true;
@@ -29,6 +38,18 @@ public static void main(String[] args) {
 	int	ip_check = 0;    //kernel will fill the correct checksum
 	//int	ip_saddr = socket.inet_aton ( source_ip );   //Spoof the source ip address if you want to
 	//int	ip_daddr = socket.inet_aton ( dest_ip );
+
+	try {
+		InetAddress ip_saddr = InetAddress.getByName(source_ip);
+	} catch (UnknownHostException e) {
+		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
+	}
+	try {
+		InetAddress ip_daddr = InetAddress.getByName(dest_ip);
+	} catch (UnknownHostException e) {
+		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
+	}
+	
 
 
 	//tcp header fields
@@ -58,8 +79,20 @@ public static void main(String[] args) {
 	String user_data = "Hello, how are you";
 
 	// pseudo header fields
-	//String source_address = socket.inet_aton( source_ip );
-	//String dest_address = socket.inet_aton(dest_ip);
+
+
+	try {
+		InetAddress ip_saddr = InetAddress.getByName(source_ip);
+	} catch (UnknownHostException e) {
+		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
+	}
+	try {
+		InetAddress ip_daddr = InetAddress.getByName(dest_ip);
+	} catch (UnknownHostException e) {
+		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
+	}
+
+	
 	int placeholder = 0;
 	//String protocol = socket.IPPROTO_TCP;
 	//String tcp_length = len(tcp_header) + len(user_data);
@@ -67,9 +100,9 @@ public static void main(String[] args) {
 	//String psh = psh + tcp_header + user_data;
 
 
-}
 
-	
+
+	int s = 0;
 
 
 		/*try {
@@ -84,32 +117,20 @@ public static void main(String[] args) {
 				}
 			}
 		}
+		*/
 
-		//public int checkSum(String msg) {
-			//for (int i = 0; i < msg.length(); ++i)
-//			{
+		public int checkSum(String msg) {
+			for (int i = 0; i < msg.length(); ++i) {
 
-			
+			}
+			s = (s>>16) + (s & 0xffff);
+			s = s + (s >> 16);
+			s = ~s & 0xffff
 
-
-		
-		//}
-	
-
-*/
+			return s;
 
 
 
-
-
-
-
-		//public static main(String[]args) {
-
-			//for (end = time; end < 60; ++end) {
-				
-			
-		
 
 
 
