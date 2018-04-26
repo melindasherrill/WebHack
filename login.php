@@ -1,4 +1,18 @@
     <?php
+    // function checkLogin($user, $password)
+    // {
+    //     $string = $user . $password;
+
+    //     if(preg_match('/(OR)/', $string)==true || preg_match('/(LIMIT)/', $string)==true)
+    //     {
+    //         echo "Nice try! ";
+    //         return false;
+    //     }
+    //     else{
+    //         return true;
+    //     }
+    // }
+
     $db = new SQLite3('dbs/users.sqlite');
     if(isset($_POST["login-submit"])){ // If button pressed, submit information
         $user = $_POST['username'];
