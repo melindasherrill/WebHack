@@ -41,8 +41,6 @@ public class TCPSynAttack {
       		System.exit(0);
 		}
 		System.out.println("Success");
-
-		//DataOutputStream sendToServer = new DataOutputStream(socket.getOutputStream());
 		
 		ByteBuffer buf = ByteBuffer.allocate(1024);
 
