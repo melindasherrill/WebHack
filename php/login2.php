@@ -22,11 +22,11 @@
 
     if(isset($_POST["login-submit"])){ //When login button is pressed, run this code
         $username = $_POST['username']; //record user from form
-        $passname = $_POST['password'];  // record pass from form  
+        $password = $_POST['password'];  // record pass from form  
 
         if(checkLogin($username, $password)){ //If password is good
 
-            $result = $db->query("select * from users where username = '$username' and password = '$passname'");//connect to query
+            $result = $db->query("select * from users where username = '$username' and password = '$password'");//connect to query
             $row = $result->fetchArray(); // fetch query
 
             if($row == false){ // if nothing returned, login fails      
