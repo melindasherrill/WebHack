@@ -10,9 +10,10 @@ OR '1'='1' /*
 > There are three webpages that our exploitable:
 1. http://frechetta.me/WebHack
 2. http://frechetta.me/WebHack/database.html
-3. 2. http://frechetta.me/WebHack/register.html
+3. http://frechetta.me/WebHack/register.html
 
-> For the second link, the database.html, the goal is to dump the database. To exploit this command enter this:
+> For the second link, the database.html, the goal is to dump the database. 
+To exploit this command enter this:
 ``` 1 OR customerid > 1 ```
 
 ## Team member Logs
