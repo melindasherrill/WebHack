@@ -14,7 +14,9 @@ OR '1'='1' /*
 
 > For the second link, the database.html, the goal is to dump the database. 
 To exploit this command enter this:
-``` 1 OR customerid > 1 ```
+``` 
+1 OR customerid > 1 
+```
 
 ## Team member Logs
 ### Submission 2
