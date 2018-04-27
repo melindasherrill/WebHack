@@ -73,9 +73,11 @@ public class TCPSynAttack {
 			if(endTime - startTime < 60){
 				try(DataOutputStream sendToServer = new DataOutputStream(socket.getOutputStream()))
 		        {
+		        	while(timeToExit != false) {
 		        	sendToServer.write(arr, 0, size);
 		        	sent++;
 		        	System.out.println("Packt got sent");
+		        }
 		        }
 		        catch(IOException ex)
 		        {
