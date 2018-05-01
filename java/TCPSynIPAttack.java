@@ -156,8 +156,8 @@ class TCPSynIPAttack {
 			while (et != false) {
 			outToServer.write(arr, 0, size);
 			outToServer.write(newArr, 0, thisSize);
-			while (count != 1000000) {
-			System.out.println("Attack number:" + count + "\nIP:" + count + " \nTCP:" + count + "\nTime of Attack:" + dtf.format(now) + " "+ java.time.LocalTime.now());
+			while (count != 1000) {
+			System.out.println( "\nTime of Attack: " + dtf.format(now) + " "+ java.time.LocalTime.now() + "\nAttack number:" + count + "\nIP:" + count + " \nTCP:" + count);
 			//System.out.println("TCP sent attack number: " + newArr);
 
 			++ count;
@@ -166,7 +166,7 @@ class TCPSynIPAttack {
 		}
 			
 			} catch (IOException ee) { 
-				System.out.println("count complete");
+				System.out.println("Attack complete: " + dtf.format(now) + " "+ java.time.LocalTime.now());
 			} 
 			et = false;
 			break;
