@@ -7,10 +7,6 @@ David Jensen, Presentation project. This program is designed to use both TCP and
 
 
 
-
-
-
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
