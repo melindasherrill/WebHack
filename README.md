@@ -52,13 +52,15 @@ python sessions.py "' or 1--"
 The way some web portals are structured, a malicious user can be able to dump a database. Within this example, we have a customer database portal where when we enter an id, a customer is displayed for us.
 
 ### Last Example (Half-blind injection)
-* Go to frechetta.me/WebHack/register.html
+Go to http://frechetta.me/WebHack/register.html
 This should look familar to our first example, but here, you will notice your previous sql injection no longer work. For this half-blind injection, we want to exploit the register form box. Play around a bit and type in "admin" for the user input.
 * You will notice that the redirected page only has too reponses:
-``` Registeration has been disabled ```
+``` Registeration has been disabled ``` and 
 ``` Someone already has registered with that username ```
 The second means the username exists, so we can exploit the website using the register_sessions.py file to retrieve the password.
-```python register_sessions.py ```
+```
+python register_sessions.py
+```
 This will print out the password in command line. Try logging in with this password and with the username 'admin' ;)
 
 ## References:
