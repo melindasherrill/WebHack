@@ -1,7 +1,8 @@
 /*
 
 David Jensen, Presentation project. This program is designed to use both TCP and IP vulnerabilities 
-compile and run as TcpsynIPattack.java
+compile and run as TcpsynIPattack.java 
+pass checkstyle
 
 */
 import java.io.BufferedReader;
