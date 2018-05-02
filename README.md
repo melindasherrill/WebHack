@@ -5,7 +5,7 @@
 
 > The website we are hacking is [frechetta.me/WebHack](http://frechetta.me/WebHack). The python scripts interface with this website to exploit sql commands. Try messing around with the login page. Try typing in the login inputs:
 ``` 
-OR '1'='1' /*
+' or 1--
 ```
 > There are three webpages that our exploitable:
 1. http://frechetta.me/WebHack
@@ -30,13 +30,23 @@ To exploit this command enter this:
 2. David Jensen - worked on APflood DoSS attack using web sockets in java
 3. Edgar Delgado - worked on TCP+SYN flood using web sockets in java
 
-## To Run SQL Python Exploits
-* In the python folder, you will see a few python scripts. Both can be ran. One creates a sample database using the SQlite3 Api. The other will allow you to send sql injections to the website. First, make sure the python requests lib is installed on the icd server.
+## Python SQL Injection Walkthrough
+* In the python folder, you will see a few python scripts. There are two types: database and sessions. The database scripts create sample databases for the website to use for exploitation. These run simply witn ``` python customerdatabase.py ``` .
+
+### First Example
+The session scripts are the ones that will interface with the website and send sql injections to the website. SQL and MySQL are the most commonly used database languages, and sql injections are ambigious statements that can bypass/break a database's schema structure. 
+
+For this project, you can exploit the website in two ways: 1) directly going to the webpage and typing in the injection or 2) running the python session files. Hackers don't have time to just type sql injections directly into websites, as they are busy hacking many websites at once. Instead, they will create scripts, such as the python ones seen in our project, and loop through a series of injections until one works.
+
+First, make sure the python requests lib is installed on the icd server.
 Run this:
 ``` pip install requests ```
-* Go to frechetta.me/WebHack (This is where this injection is pointing to)
+* Go to http://frechetta.me/WebHack (This is where this injection is pointing to)
 * Once requests is installed, you can run the sessions file:
-``` python sessions.py "insert injection here" ```
+``` 
+python sessions.py "insert injection here" 
+python sessions.py "' or 1--"
+```
 
 * Go to frechetta.me/WebHack/register.html
 * Here, for the login form, you will noticed that your basic "LIMIT" injections will no longer work. For this half-blind injection, we want to exploit the register form box. Play around a bit and type in "admin" for the user input.
