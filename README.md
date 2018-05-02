@@ -31,9 +31,9 @@ To exploit this command enter this:
 3. Edgar Delgado - worked on TCP+SYN flood using web sockets in java
 
 ## Python SQL Injection Walkthrough
-* In the python folder, you will see a few python scripts. There are two types: database and sessions. The database scripts create sample databases for the website to use for exploitation. These run simply witn ``` python customerdatabase.py ``` .
+In the python folder, you will see a few python scripts. There are two types: database and sessions. The database scripts create sample databases for the website to use for exploitation. These run simply witn ``` python customerdatabase.py ``` .
 
-### First Example
+### First Example (Basic login bypass)
 The session scripts are the ones that will interface with the website and send sql injections to the website. SQL and MySQL are the most commonly used database languages, and sql injections are ambigious statements that can bypass/break a database's schema structure. 
 
 For this project, you can exploit the website in two ways: 1) directly going to the webpage and typing in the injection or 2) running the python session files. Hackers don't have time to just type sql injections directly into websites, as they are busy hacking many websites at once. Instead, they will create scripts, such as the python ones seen in our project, and loop through a series of injections until one works.
@@ -48,8 +48,12 @@ python sessions.py "insert injection here"
 python sessions.py "' or 1--"
 ```
 
+### Second Example (Database dump)
+The way some web portals are structured, a malicious user can be able to dump a database. Within this example, we have a customer database portal where when we enter an id, a customer is displayed for us.
+
+### Last Example (Half-blind injection)
 * Go to frechetta.me/WebHack/register.html
-* Here, for the login form, you will noticed that your basic "LIMIT" injections will no longer work. For this half-blind injection, we want to exploit the register form box. Play around a bit and type in "admin" for the user input.
+This should look familar to our first example, but here, you will notice your previous sql injection no longer work. For this half-blind injection, we want to exploit the register form box. Play around a bit and type in "admin" for the user input.
 * You will notice that the redirected page only has too reponses:
 ``` Registeration has been disabled ```
 ``` Someone already has registered with that username ```
