@@ -1,6 +1,7 @@
 /*
 
-David Jensen, Presentation project. This program is designed to use both TCP and IP vulnerabilities 
+David Jensen, Presentation project. This program is designed to use both TCP and IP vulnerabilities
+DDos flood attack, sends 200,000 TCP & IP attacks to the desired host and port.
 compile and run as TcpsynIPattack.java 
 pass checkstyle
 
