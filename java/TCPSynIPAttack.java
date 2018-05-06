@@ -139,8 +139,7 @@ class TcpsynIPattack {
           outToServer.write(newArr, 0, thisSize);
           while (count != 100000) {
             System.out.println("\nTime of Attack: " + dtf.format(now) + " " 
-                + java.time.LocalTime.now() + "\nAttack number:" + count + "\nIP:" + count
-                  + " \nTCP:" + count);
+                + java.time.LocalTime.now() + "\nDDos Attack number:" + count);
             //System.out.println("TCP sent attack number: " + newArr);
 
             ++ count;
