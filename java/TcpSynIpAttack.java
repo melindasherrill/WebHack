@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 
 
-class TcpsynIPattack {
+class TcpSynIpAttack {
 
   public static void main(String[] args) {
 
