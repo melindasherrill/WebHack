@@ -51,6 +51,10 @@ python sessions.py "' or 1--"
 ### Second Example (Database dump)
 The way some web portals are structured, a malicious user can be able to dump a database. Within this example, we have a customer database portal where when we enter an id, a customer is displayed for us.
 
+```
+python database_sessions.py "1 or customerid > 1"
+```
+
 ### Last Example (Half-blind injection)
 Go to http://frechetta.me/WebHack/register.html
 This should look familar to our first example, but here, you will notice your previous sql injection no longer work. For this half-blind injection, we want to exploit the register form box. Play around a bit and type in "admin" for the user input.
