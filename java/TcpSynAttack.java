@@ -14,7 +14,7 @@ import java.nio.ByteBuffer;
 
 public class TcpSynAttack {
   /**
-  * Main method.
+  * Main Method.
   */
   public static void main(String[] args) {
     boolean timeToExit = false; 
