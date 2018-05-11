@@ -19,4 +19,5 @@ def evaluateSQL(cond):
     response = postURL(BASEURL, {"cust": payload})
     return response
 
+
 print evaluateSQL(sys.argv[1])

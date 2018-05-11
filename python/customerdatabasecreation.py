@@ -35,6 +35,7 @@ def data_entry():
     c.close()
     conn.close()
 
+
 # Run functions
 create_table()
 data_entry()

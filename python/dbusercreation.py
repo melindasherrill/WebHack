@@ -25,6 +25,7 @@ def data_entry():
     c.close()
     conn.close()
 
+
 # Run the functions
 create_table()
 data_entry()
