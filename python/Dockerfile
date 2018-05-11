@@ -12,4 +12,6 @@ RUN yum -y install epel-release \
 WORKDIR /app
 COPY . /app
 
-CMD python python/sessions.py "' or 1--"
+CMD python sessions.py "' or 1--" \
+    && python database_sessions.py "1 or customerid > 1" \
+    && python register_sessions.py
