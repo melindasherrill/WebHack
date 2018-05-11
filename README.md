@@ -30,6 +30,13 @@ To exploit this command enter this:
 2. David Jensen - worked on APflood DoSS attack using web sockets in java
 3. Edgar Delgado - worked on TCP+SYN flood using web sockets in java
 
+### Run DDoS Attacks
+The DDoS attacks exist in the /java folder. They run the typically, old fashioned CLI way java runs.
+```
+javac TcpSynAttack.java
+java TcpSynAttack
+```
+
 ## Python SQL Injection Walkthrough
 In the python folder, you will see a few python scripts. There are two types: database and sessions. The database scripts create sample databases for the website to use for exploitation. These run simply witn ``` python customerdatabase.py ``` .
 
