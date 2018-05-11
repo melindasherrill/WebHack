@@ -11,4 +11,4 @@ USER root
 
 COPY . /app
 
-CMD "python ./sentiment.py"
+CMD "python ./sessions.py"
